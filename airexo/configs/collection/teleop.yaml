@@ -1,0 +1,105 @@
+defaults:
+  - _self_
+  - ../joint/left/airexo.yaml@airexo_left_joint_cfgs  # left joint configuration for AirExo-2
+  - ../joint/right/airexo.yaml@airexo_right_joint_cfgs  # right joint configuration for AirExo-2
+  - ../joint/left/robot.yaml@robot_left_joint_cfgs  # left joint configuration for robot
+  - ../joint/right/robot.yaml@robot_right_joint_cfgs  # right joint configuration for robot
+  - ../joint/left/calib.yaml@left_calib_cfgs  # left joint calibration configuration
+  - ../joint/right/calib.yaml@right_calib_cfgs  # right joint calibration configuration
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled
+
+type: teleop  # choices: teleop, wild
+path: "/home/ubuntu/data/"  # path to save data
+cameras:  # list of camera serials
+  - "105422061350"
+  - "104122064161"
+  - "104122061330"
+camera_freq: 20  # camera frequency
+
+controller:  # controller configuration
+  _target_: airexo.collection.controller.DualArmController
+
+  left_arm:  # left arm configuration
+    _target_: airexo.collection.controller.SingleArmTeleoperator
+    robot:  # robot configuration
+      _target_: airexo.device.robot.Robot
+      serial: Rizon4-062077
+      joint_cfgs: ${robot_left_joint_cfgs}
+      gripper: 
+        _target_: airexo.device.gripper.Robotiq2F85Gripper
+        port: /dev/ttyUSB0
+        logger_name: Gripper-left
+      logger_name: Robot-left
+      min_joint_diff: 0.01
+    airexo:  # AirExo configuration
+      _target_: airexo.device.airexo.AirExo
+      port: /dev/ttyUSB2
+      joint_cfgs: ${airexo_left_joint_cfgs}
+      baudrate: 115200
+      sleep_gap: 0.0016
+      logger_name: AirExo-left
+    calib_cfgs: ${left_calib_cfgs}
+    logger_name: TeleOP-left  # logger name
+
+    max_vel_safe: [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]  # max velocity for initialization and calibration
+    max_acc_safe: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]  # max acceleration for initialization and calibration
+    max_vel_rt: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]  # max velocity for real-time control
+    max_acc_rt: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0]  # max acceleration for real-time control
+
+    use_impedance: True  # whether to use impedance control
+    impedance_joint_stiffness: [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0]  # joint stiffness for impedance control
+    impedance_joint_damping_ratio: [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]  # joint damping ratio for impedance control
+
+  right_arm:  # right arm configuration
+    _target_: airexo.collection.controller.SingleArmTeleoperator
+    robot:  # robot configuration
+      _target_: airexo.device.robot.Robot
+      serial: Rizon4R-062016
+      joint_cfgs: ${robot_right_joint_cfgs}
+      gripper: 
+        _target_: airexo.device.gripper.Robotiq2F85Gripper
+        port: /dev/ttyUSB1
+        logger_name: Gripper-right
+      logger_name: Robot-right
+      min_joint_diff: 0.01
+    airexo:  # AirExo configuration
+      _target_: airexo.device.airexo.AirExo
+      port: /dev/ttyUSB3
+      joint_cfgs: ${airexo_right_joint_cfgs}
+      baudrate: 115200
+      sleep_gap: 0.0016
+      logger_name: AirExo-right
+    calib_cfgs: ${right_calib_cfgs}
+    logger_name: TeleOP-right  # logger name
+
+    max_vel_safe: [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]  # max velocity for initialization and calibration
+    max_acc_safe: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]  # max acceleration for initialization and calibration
+    max_vel_rt: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]  # max velocity for real-time control
+    max_acc_rt: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0]  # max acceleration for real-time control
+
+    use_impedance: True  # whether to use impedance control
+    impedance_joint_stiffness: [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0]  # joint stiffness for impedance control
+    impedance_joint_damping_ratio: [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]  # joint damping ratio for impedance control
+
+lowdim_collectors:  # list of low-dimensional collectors
+  - _target_: airexo.collection.collector.LowdimCollector
+    name: "robot_left"  # key of the collector
+    controller_key: ["left_arm", "robot"]  # key link trajectory to the object, whose state will be collected. This object should implement `get_state()`
+    freq: 100  # frequency
+    buffer_size: 1000  # buffer size
+  - _target_: airexo.collection.collector.LowdimCollector
+    name: "robot_right"
+    controller_key: ["right_arm", "robot"]
+    freq: 100
+    buffer_size: 1000
+  - _target_: airexo.collection.collector.LowdimCollector
+    name: "gripper_left"
+    controller_key: ["left_arm", "robot", "gripper"]
+    freq: 20
+    buffer_size: 1000
+  - _target_: airexo.collection.collector.LowdimCollector
+    name: "gripper_right"
+    controller_key: ["right_arm", "robot", "gripper"]
+    freq: 20
+    buffer_size: 1000

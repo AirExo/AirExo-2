@@ -1,0 +1,12 @@
+paths:
+  base_path: null  # Base path from environment variable or default
+  scene_name: null   # Scene name from environment variable or default
+  camera_id: "cam_104122061602"  # Default camera ID
+
+dirs:
+  inpainting: "color_inpainting"  # Directory containing inpainted images
+  controlnet: "color_controlnet"  # Directory containing controlnet generated images
+  mask: "render_robot/mask"  # Directory containing mask images
+  output: "color_controlnet_test"  # Directory where combined results will be saved
+
+verbose: true        

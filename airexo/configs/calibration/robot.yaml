@@ -1,0 +1,43 @@
+defaults:
+  - _self_
+  - ../joint/left/robot_old.yaml@robot_left_joint_cfgs  # left joint configuration for robot
+  - ../joint/right/robot_old.yaml@robot_right_joint_cfgs  # right joint configuration for robot
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled
+
+type: calibrator  # choices: calibrator, annotator, solver
+
+calibrator:
+  _target_: airexo.calibration.calibrator.Calibrator
+  calib_type: robot  # choices: airexo, robot
+  calib_path: /home/ubuntu/data/calib_robot/  # path to save calibration results
+  camera_serials_global:  # list of global camera serials
+  - "105422061350"
+  camera_serial_inhand_left: "104122064161"  # serial of left inhand camera, required for robot calibration
+  camera_serial_inhand_right: "104122061330"  # serial of right inhand camera, required for robot calibration
+  device_left:  # left device (robot) configuration
+    _target_: airexo.device.robot.Robot
+    serial: Rizon4-062077
+    joint_cfgs: ${robot_left_joint_cfgs}
+    gripper:
+      _target_: airexo.device.gripper.Robotiq2F85Gripper
+      port: /dev/ttyUSB0
+      logger_name: Gripper-left
+    logger_name: Robot-left
+    min_joint_diff: 0.01
+  device_right:  # right device (robot) configuration
+    _target_: airexo.device.robot.Robot
+    serial: Rizon4R-062016
+    joint_cfgs: ${robot_right_joint_cfgs}
+    gripper:
+      _target_: airexo.device.gripper.Robotiq2F85Gripper
+      port: /dev/ttyUSB1
+      logger_name: Gripper-right
+    logger_name: Robot-right
+    min_joint_diff: 0.01
+  aruco_dict: DICT_7X7_250  # aruco dictionary
+  aruco_idx: 0  # aruco index
+  marker_length: 150  # marker length in mm
+  vis: True  # whether to visualize the calibration results in GUI
+  logger_name: Calibrator  # logger name
+  config_camera_path: airexo/configs/cameras  # path to camera configuration files

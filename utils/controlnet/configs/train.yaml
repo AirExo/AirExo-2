@@ -1,0 +1,22 @@
+paths:
+  camera_dir: "/data/color"  # Directory containing camera images
+  render_dir: "/data/rgb"  # Directory containing rendered images
+  output_dir: "/checkpoint"  # Directory to save checkpoints
+
+model:
+  yaml_path: null  # Path to model yaml file (empty uses default)
+  resume_path: "control_sd15_ini.ckpt" # Path to checkpoint to resume from
+  sd_locked: true  # Whether to lock stable diffusion model weights
+  only_mid_control: false  # Whether to only use mid-level control
+
+training:
+  prompt: "robotic arms, dual arm, industrial robotic manipulator, metallic silver color, mechanical joints, precise mechanical details, gripper end effector, high quality photo, photorealistic, clear and sharp details" # Text prompt for conditioning
+  batch_size: 22  # Batch size for training
+  num_workers: 4  # Number of workers for data loading
+  learning_rate: 1e-5  # Learning rate
+  precision: 32  # Training precision (16 or 32)
+  img_size: 512  # Size to resize images to
+  logger_freq: 300  # Frequency of image logging
+  save_steps: 1000  # Save checkpoint every N steps
+  accumulate_grad_batches: 4  # Gradient accumulation steps
+

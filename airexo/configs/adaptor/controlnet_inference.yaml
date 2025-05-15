@@ -1,0 +1,24 @@
+paths:
+  base_path: null  # Base path from environment variable
+  scene_name: null  # Scene name from environment variable
+  camera_id: "cam_104122061602"  # Default camera ID
+
+dirs:
+  color: "color"  # Color frames directory 
+  depth: "depth"  # Depth frames directory
+  render_robot: "render_robot"  # Rendered robot directory
+  output: "color_controlnet"  # Output directory
+
+model:
+  config_path: "ControlNet/models/cldm_v15.yaml"
+  checkpoint_path: "checkpoint.ckpt"
+  device: "cuda"
+
+inference:
+  prompt: "robotic arms, dual arm, industrial robotic manipulator, metallic silver color, mechanical joints, precise mechanical details, gripper end effector, high quality photo, photorealistic, clear and sharp details"
+  num_samples: 1
+  image_size: 512
+  steps: 50
+  scale: 9.0
+  seed: null
+  batch_size: 23

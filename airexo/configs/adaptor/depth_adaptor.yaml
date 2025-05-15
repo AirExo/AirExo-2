@@ -1,0 +1,21 @@
+paths:
+  base_path: null  # Base path from environment variable
+  scene_name: null  # Scene name from environment variable
+  camera_id: "cam_104122061602"  # Default camera ID
+  empty_depth_dir: "/data/empty/cam_104122061602/depth"  # Path to empty depth directory
+
+dirs:
+  color: "color"                   # Color frames directory
+  depth: "depth"                   # Depth frames directory
+  sam_mask: "sam_mask"             # SAM mask directory
+  sam_base_mask: "sam_base_mask"   # SAM base mask directory
+  render_robot: "render_robot"     # Rendered robot directory
+  render_airexo: "render_airexo"   # Rendered AirExo directory
+  output: "depth_inpainting"       # Output directory
+
+processing:
+  use_airexo_mask: true           # Whether to use airexo mask processing
+
+visualization:
+  viz_empty: true                 # Whether to visualize empty background depth
+  viz_path: "./empty_depth_viz.png"  # Path to save empty depth visualization

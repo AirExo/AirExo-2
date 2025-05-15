@@ -1,0 +1,30 @@
+joint1:
+  type: mapping
+  airexo: 143.31455993652344
+  robot: 0
+joint2:
+  type: mapping
+  airexo: 298.77825927734375
+  robot: 0
+joint3:
+  type: mapping
+  airexo: 197.52243041992188
+  robot: 0
+joint4:
+  type: mapping
+  airexo: 289.76959228515625
+  robot: 0
+joint5:
+  type: mapping
+  airexo: 353.7710266113281
+  robot: 0
+joint6:
+  type: mapping
+  airexo: 16.938444137573242
+  robot: 90
+joint7:
+  type: mapping
+  airexo: 43.28127670288086
+  robot: 0
+joint8:
+  type: scaling

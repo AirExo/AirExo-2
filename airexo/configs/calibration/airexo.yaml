@@ -1,0 +1,37 @@
+defaults:
+  - _self_
+  - ../joint/left/airexo.yaml@airexo_left_joint_cfgs  # left joint configuration for AirExo-2
+  - ../joint/right/airexo.yaml@airexo_right_joint_cfgs  # right joint configuration for AirExo-2
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled
+
+type: calibrator  # choices: calibrator, annotator, solver
+
+calibrator:
+  _target_: airexo.calibration.calibrator.Calibrator
+  calib_type: airexo  # choices: airexo, robot
+  calib_path: /home/ubuntu/data/calib_airexo  # path to save calibration results
+  camera_serials_global:  # list of global camera serials
+  - "104122061602"
+  camera_serial_inhand_left: null  # serial of left inhand camera
+  camera_serial_inhand_right: null  # serial of right inhand camera
+  device_left:  # left device (AirExo-2) configuration
+    _target_: airexo.device.airexo.AirExo
+    port: /dev/ttyUSB2
+    joint_cfgs: ${airexo_left_joint_cfgs}
+    baudrate: 115200
+    sleep_gap: 0.0016
+    logger_name: AirExo-left
+  device_right:  # right device (AirExo-2) configuration
+    _target_: airexo.device.airexo.AirExo
+    port: /dev/ttyUSB3
+    joint_cfgs: ${airexo_right_joint_cfgs}
+    baudrate: 115200
+    sleep_gap: 0.0016
+    logger_name: AirExo-right
+  aruco_dict: DICT_7X7_250  # aruco dictionary
+  aruco_idx: 0  # aruco index
+  marker_length: 150  # marker length in mm
+  vis: True  # whether to visualize the calibration results in GUI
+  logger_name: Calibrator  # logger name
+  config_camera_path: airexo/configs/cameras  # path to camera configuration files

@@ -1,0 +1,30 @@
+defaults:
+  - _self_
+  - ../../joint/left/airexo.yaml@airexo_left_joint_cfgs
+  - ../../joint/left/calib.yaml@left_calib_cfgs
+  - ../../joint/right/airexo.yaml@airexo_right_joint_cfgs
+  - ../../joint/right/calib.yaml@right_calib_cfgs
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled
+
+urdf_file: airexo/urdf_models/airexo/airexo.urdf
+
+left_joint:
+  - 251.279
+  - 71.718
+  - 90.176
+  - 237.041
+  - 5.273
+  - 29.707
+  - 81.035
+  - 26.895
+
+right_joint:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0

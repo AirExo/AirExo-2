@@ -1,0 +1,71 @@
+paths:
+  base_path: null  # Base path from environment variable or default
+  scene_name: null   # Scene name from environment variable or default
+  video: ${.base_path}/${.scene_name}/cam_104122061602/color  # Input video path or image folder
+  mask: ${.base_path}/${.scene_name}/cam_104122061602/sam_mask  # Path of mask(s) or mask folder
+  render_airexo_path: ${.base_path}/${.scene_name}/cam_104122061602/render_airexo/mask  # Optional path to render mask
+  output: ${.base_path}/propainter_combine  # Output folder
+  output_pics: ${.base_path}/${.scene_name}/cam_104122061602/color_inpainting  # Path for output pictures
+  model_dir: 'weights'  # Directory for model weights
+
+video:
+  resize_ratio: 1.0  # Resize scale for processing video
+  height: -1  # Height of the processing video, -1 for original
+  width: -1  # Width of the processing video, -1 for original
+  save_fps: 24  # Frame per second
+  save_frames: false  # Save output frames
+
+outpainting:
+  scale_h: 1.0  # Outpainting scale of height
+  scale_w: 1.2  # Outpainting scale of width
+
+mode: video_inpainting  # choices: video_inpainting, video_outpainting
+processing:
+  mask_dilation: 4  # Mask dilation for video and flow masking
+  ref_stride: 10  # Stride of global reference frames
+  neighbor_length: 10  # Length of local neighboring frames
+  subvideo_length: 80  # Length of sub-video for long video inference
+  raft_iter: 20  # Iterations for RAFT inference
+runtime:
+  fp16: false  # Use half precision during inference
+
+  # # High quality profile
+  # high_quality:
+  #   mode: video_inpainting
+  #   processing:
+  #     mask_dilation: 6  # Increased mask dilation
+  #     ref_stride: 8  # Closer reference frames
+  #     neighbor_length: 12  # More neighboring frames
+  #     subvideo_length: 60  # Smaller chunks for better processing
+  #     raft_iter: 30  # More iterations for RAFT
+  #   runtime:
+  #     fp16: false  # Use full precision for best quality
+
+  # # Fast processing profile
+  # fast:
+  #   mode: video_inpainting
+  #   video:
+  #     resize_ratio: 0.75  # Process at lower resolution
+  #   processing:
+  #     mask_dilation: 3  # Less dilation
+  #     ref_stride: 12  # Fewer reference frames
+  #     neighbor_length: 8  # Fewer neighboring frames
+  #     subvideo_length: 100  # Larger chunks for faster processing
+  #     raft_iter: 12  # Fewer iterations for RAFT
+  #   runtime:
+  #     fp16: true  # Use half precision for better speed
+
+  # # Outpainting profile
+  # outpainting:
+  #   mode: video_outpainting
+  #   outpainting:
+  #     scale_h: 1.2  # Expand height by 20%
+  #     scale_w: 1.5  # Expand width by 50%
+  #   processing:
+  #     mask_dilation: 5
+  #     ref_stride: 10
+  #     neighbor_length: 10
+  #     subvideo_length: 70
+  #     raft_iter: 20
+  #   runtime:
+  #     fp16: false

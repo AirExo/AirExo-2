@@ -1,0 +1,12 @@
+[submodule "dependencies/ControlNet"]
+	path = dependencies/ControlNet
+	url = git@github.com:lllyasviel/ControlNet.git
+[submodule "dependencies/sam2"]
+	path = dependencies/sam2
+	url = git@github.com:facebookresearch/sam2.git
+[submodule "dependencies/ProPainter"]
+	path = dependencies/ProPainter
+	url = git@github.com:sczhou/ProPainter.git
+[submodule "dependencies/pytorch3d"]
+	path = dependencies/pytorch3d
+	url = git@github.com:facebookresearch/pytorch3d.git

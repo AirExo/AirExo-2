@@ -1,0 +1,41 @@
+defaults:
+  - _self_
+  - ../joint/left/robot.yaml@robot_left_joint_cfgs
+  - ../joint/left/airexo.yaml@airexo_left_joint_cfgs
+  - ../joint/left/calib.yaml@left_calib_cfgs
+  - ../joint/right/robot.yaml@robot_right_joint_cfgs
+  - ../joint/right/airexo.yaml@airexo_right_joint_cfgs
+  - ../joint/right/calib.yaml@right_calib_cfgs
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled
+
+path: null
+
+camera_serial: "104122061602"
+
+calib_info:
+  _target_: airexo.calibration.calib_info.CalibrationInfo
+  calib_path: /home/jingjing/workspace/sp1/AirExo-2/airexo/assets/calib_airexo/
+  calib_timestamp: 1737226610748
+
+airexo_renderer:
+  _target_: airexo.adaptor.renderer.AirExoRenderer
+  left_joint_cfgs: ${airexo_left_joint_cfgs}
+  right_joint_cfgs: ${airexo_right_joint_cfgs}
+  left_calib_cfgs: ${left_calib_cfgs}
+  right_calib_cfgs: ${right_calib_cfgs}
+  width: 1280
+  height: 720
+  near_plane: 0.01
+  far_plane: 100.0
+  urdf_file: airexo/urdf_models/airexo/airexo.urdf
+
+robot_renderer:
+  _target_: airexo.adaptor.renderer.RobotRenderer
+  left_joint_cfgs: ${robot_left_joint_cfgs}
+  right_joint_cfgs: ${robot_right_joint_cfgs}
+  width: 1280
+  height: 720
+  near_plane: 0.01
+  far_plane: 100.0
+  urdf_file: airexo/urdf_models/robot/robot_inhand.urdf

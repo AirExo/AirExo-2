@@ -1,0 +1,31 @@
+defaults:
+  - _self_
+  - ../joint/left/robot.yaml@robot_left_joint_cfgs
+  - ../joint/left/airexo.yaml@airexo_left_joint_cfgs
+  - ../joint/left/calib.yaml@left_calib_cfgs
+  - ../joint/right/robot.yaml@robot_right_joint_cfgs
+  - ../joint/right/airexo.yaml@airexo_right_joint_cfgs
+  - ../joint/right/calib.yaml@right_calib_cfgs
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled
+
+_target_: airexo.urdf_models.visualizer.airexo.AirExoVisualizer
+
+urdf_file: airexo/urdf_models/airexo/airexo.urdf
+
+left_airexo:
+  _target_: airexo.device.airexo.AirExo
+  port: /dev/ttyUSB2
+  joint_cfgs: ${airexo_left_joint_cfgs}
+  baudrate: 115200
+  sleep_gap: 0.0016
+  logger_name: AirExo-left
+  
+right_airexo: 
+  _target_: airexo.device.airexo.AirExo
+  port: /dev/ttyUSB3
+  joint_cfgs: ${airexo_right_joint_cfgs}
+  baudrate: 115200
+  sleep_gap: 0.0016
+  logger_name: AirExo-right
+

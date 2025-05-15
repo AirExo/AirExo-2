@@ -1,0 +1,20 @@
+data:
+  scene_name: "scene_0036"
+  camera_id: "cam_104122061602"
+  prefix: "cam_104122061602/color"
+  input_data_root: "/data/train/"
+  tmp_dir: "/data/test"
+  visualize_dir: "/data/train/"
+  visualize_name: "cam_104122061602/test"
+
+model:
+  checkpoint: "sam2.1_hiera_large.pt"
+  config: "sam2.1_hiera_l.yaml"
+  device: "cuda"
+ 
+processing:
+  convert_png_to_jpg: null  
+  interval: null  
+  start_frame: null 
+  do_annotation: true
+  do_generalize: true

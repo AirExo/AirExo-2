@@ -1,0 +1,36 @@
+defaults:
+  - _self_
+  - ../../joint/left/robot_old.yaml@robot_left_joint_cfgs
+  - ../../joint/left/airexo_old.yaml@airexo_left_joint_cfgs
+  - ../../joint/left/calib_old.yaml@left_calib_cfgs
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled
+
+_target_: airexo.collection.controller.SingleArmTeleoperator
+
+robot:
+  _target_: airexo.device.robot.Robot
+  serial: Rizon4-062077
+  joint_cfgs: ${robot_left_joint_cfgs}
+  gripper:
+    _target_: airexo.device.gripper.Robotiq2F85Gripper
+    port: /dev/ttyUSB0
+    logger_name: Gripper-left
+  logger_name: Robot-left
+  min_joint_diff: 0.01
+
+airexo:
+  _target_: airexo.device.airexo.AirExo
+  port: /dev/ttyUSB2
+  joint_cfgs: ${airexo_left_joint_cfgs}
+  baudrate: 115200
+  sleep_gap: 0.0016
+  logger_name: AirExo-left
+
+calib_cfgs: ${left_calib_cfgs}
+
+use_impedance: True
+impedance_joint_stiffness: [100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0]
+impedance_joint_damping_ratio:  [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
+
+logger_name: TeleOP-left

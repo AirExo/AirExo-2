@@ -1,0 +1,72 @@
+defaults:
+  - _self_
+  - ../../joint/left/robot.yaml@robot_left_joint_cfgs
+  - ../../joint/left/airexo.yaml@airexo_left_joint_cfgs
+  - ../../joint/left/calib.yaml@left_calib_cfgs
+  - ../../joint/right/robot.yaml@robot_right_joint_cfgs
+  - ../../joint/right/airexo.yaml@airexo_right_joint_cfgs
+  - ../../joint/right/calib.yaml@right_calib_cfgs
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled
+
+camera_serial: "105422061350"
+
+calib_info:
+  _target_: airexo.calibration.calib_info.CalibrationInfo
+  calib_path: /home/ubuntu/data/calib_robot
+  calib_timestamp: 1736839735812
+
+renderer:
+  _target_: airexo.helpers.renderer.SeparateRobotRenderer
+  left_joint_cfgs: ${robot_left_joint_cfgs}
+  right_joint_cfgs: ${robot_right_joint_cfgs}
+  urdf_file: 
+    left: airexo/urdf_models/robot/left_robot_inhand.urdf
+    right: airexo/urdf_models/robot/right_robot_inhand.urdf
+  width: 1280
+  height: 720
+  near_plane: 0.01
+  far_plane: 100.0
+
+fixed: True
+fixed_left_robot:
+  - 1.078
+  - -2.201
+  - 1.628
+  - -1.162
+  - -0.958
+  - 0.503
+  - 0.875
+  - 0.05
+fixed_right_robot:
+  - 1.397
+  - -2.226
+  - 1.835
+  - -1.367
+  - -0.647
+  - 0.781
+  - 0.972
+  - 0.05
+
+left_robot:
+  _target_: airexo.device.robot.Robot
+  serial: Rizon4-062077
+  joint_cfgs: ${robot_left_joint_cfgs}
+  gripper:
+    _target_: airexo.device.gripper.Robotiq2F85Gripper
+    port: /dev/ttyUSB0
+    logger_name: Gripper-left
+  logger_name: Robot-left
+  min_joint_diff: 0.01
+  
+right_robot: 
+  _target_: airexo.device.robot.Robot
+  serial: Rizon4R-062016
+  joint_cfgs: ${robot_right_joint_cfgs}
+  gripper:
+    _target_: airexo.device.gripper.Robotiq2F85Gripper
+    port: /dev/ttyUSB1
+    logger_name: Gripper-right
+  logger_name: Robot-right
+  min_joint_diff: 0.01
+

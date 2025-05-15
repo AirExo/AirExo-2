@@ -1,0 +1,42 @@
+defaults:
+  - _self_
+  - ../joint/left/airexo.yaml@airexo_left_joint_cfgs  # left joint configuration for AirExo-2
+  - ../joint/right/airexo.yaml@airexo_right_joint_cfgs  # right joint configuration for AirExo-2
+  - ../joint/left/calib.yaml@left_calib_cfgs  # left joint calibration configuration
+  - ../joint/right/calib.yaml@right_calib_cfgs  # right joint calibration configuration
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled
+
+type: solver  # choices: calibrator, annotator, solver
+
+solver:
+  _target_: airexo.calibration.solver.AirExoCalibrationDifferntiableRenderingSolver
+
+  calib_info:  # last calibration results (to be refined)
+    _target_: airexo.calibration.calib_info.CalibrationInfo
+    calib_path: /home/ubuntu/data/calib_airexo  # path to last calibration results
+    calib_timestamp: 1737226610748  # calibration timestamp
+
+  camera_serial: "104122061602"  # serial of global camera
+
+  airexo_left_joint_cfgs: ${airexo_left_joint_cfgs}
+  airexo_right_joint_cfgs: ${airexo_right_joint_cfgs}
+  left_calib_cfgs: ${left_calib_cfgs}
+  right_calib_cfgs: ${right_calib_cfgs}
+
+  urdf_file: airexo/urdf_models/airexo/airexo_no_handle.urdf  # URDF file
+
+  device: cuda  # choices: cpu, cuda
+  max_translation: 0.03  # max translation in meters in terms of camera calibration
+  max_rotation: 0.05243  # max rotation in radians in terms of camera calibration
+  max_degree: 3  # max degree of rotation in terms of joint calibration
+  width: 1280  # image width
+  height: 720  # image height
+  max_disparency: 0.1  # max disparency
+
+solver_params:
+  data_path: /home/ubuntu/data/airexo_calib_pair_data/  # path to the training data for calibration refinement
+  save_path: /home/ubuntu/data/airexo_calib_solver/  # path to save the calibration refinement results
+  num_iter: 1000  # number of iterations
+  lr: 0.0001  # learning rate
+  beta: 5  # balancing coefficient of mask loss and depth loss

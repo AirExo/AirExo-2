@@ -1,0 +1,11 @@
+defaults:
+  - _self_
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled
+    
+_target_: airexo.device.camera.RealSenseRGBDCamera
+serial: "104122061330"
+frame_rate: 30
+resolution: [1280, 720]
+align: True
+logger_name: Camera-right

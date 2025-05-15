@@ -1,0 +1,28 @@
+defaults:
+  - _self_
+  - ../../joint/left/robot.yaml@robot_left_joint_cfgs
+  - ../../joint/right/robot.yaml@robot_right_joint_cfgs
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled
+
+urdf_file: airexo/urdf_models/robot/robot_inhand.urdf
+
+left_joint:
+  - 72.47
+  - -112.35
+  - 84.35
+  - -83.79
+  - -33.05
+  - 5.78
+  - -0.17
+  - 0.043
+
+right_joint:
+  - 69.46
+  - -120.89
+  - 76.34
+  - -86.59
+  - -21.12
+  - -2.88
+  - 10.08
+  - 0.023

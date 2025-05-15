@@ -1,0 +1,50 @@
+num_joints: 8
+num_robot_joints: 7
+joint1:
+  id: 1
+  min: 335
+  max: 306.12305
+  direction: 1
+  rad: False
+joint2:
+  id: 2
+  min: 168.0469
+  max: 72.9400
+  direction: 1
+  rad: False
+joint3:
+  id: 3
+  min: 26.1035
+  max: 6.6797
+  direction: 1
+  rad: False
+joint4:
+  id: 4
+  min: 182.1973
+  max: 87.6270
+  direction: 1
+  rad: False
+joint5:
+  id: 5
+  min: 186.6797
+  max: 166.8164
+  direction: 1
+  rad: False
+joint6:
+  id: 6
+  min: 206.8945
+  max: 187.3828
+  direction: 1
+  rad: False
+joint7:
+  id: 7
+  min: 241.1719
+  max: 221.7481
+  direction: 1
+  rad: False
+joint8:
+  id: 8
+  min: 32
+  max: 20
+  direction: 1
+  rad: False

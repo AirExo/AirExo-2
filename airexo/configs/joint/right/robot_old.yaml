@@ -1,0 +1,71 @@
+num_joints: 8
+num_robot_joints: 7
+joint1:
+  fixed: False
+  fixed_value: 0
+  init_value: 78.55
+  min: 200.5
+  max: 159.5
+  direction: 1
+  rad: True
+  zero_centered: True
+joint2:
+  fixed: False
+  fixed_value: 0
+  init_value: 233.36
+  min: 230.5
+  max: 129.5
+  direction: 1
+  rad: True
+  zero_centered: True
+joint3:
+  fixed: False
+  fixed_value: 0
+  init_value: 72.34
+  min: 190.5
+  max: 169.5
+  direction: 1
+  rad: True
+  zero_centered: True
+joint4:
+  fixed: False
+  fixed_value: 0
+  init_value: 256.36
+  min: 253.5
+  max: 153.5
+  direction: 1
+  rad: True
+  zero_centered: True
+joint5:
+  fixed: False
+  fixed_value: 0
+  init_value: 0
+  min: 190.5
+  max: 169.5
+  direction: 1
+  rad: True
+  zero_centered: True
+joint6:
+  fixed: False
+  fixed_value: 0
+  init_value: 341.24
+  min: 280.5
+  max: 259.5
+  direction: 1
+  rad: True
+  zero_centered: True
+joint7:
+  fixed: False
+  fixed_value: 0
+  init_value: 0
+  min: 190.5
+  max: 169.5
+  direction: 1
+  rad: True
+  zero_centered: True
+joint8:
+  fixed: False
+  fixed_value: 0
+  init_value: 0
+  min: 0.17
+  max: 0
