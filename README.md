@@ -1,6 +1,6 @@
 # AirExo-2: Scaling up Generalizable Robotic Imitation Learning with Low-Cost Exoskeletons
 
-[Paper](https://arxiv.org/abs/2503.03081) | [Project Page](http://airexo.tech/airexo2/) | [***AirExo*-2** Hardware](https://github.com/AirExo/AirExo-2/tree/main/assets/models/AirExo-2) | [***RISE*-2** Policy](https://github.com/rise-policy/RISE-2)
+[Paper](https://arxiv.org/abs/2503.03081) | [Project Page](http://airexo.tech/airexo2/) | [***AirExo*-2** Hardware](https://github.com/AirExo/AirExo-2/tree/main/assets/models/AirExo-2) | [Sample Data](https://drive.google.com/drive/folders/1xfJgn1qVLBgNhaFq7sbE6C6ylM6zZS9p?usp=sharing) | [***RISE*-2** Policy](https://github.com/rise-policy/RISE-2)
 
 **Authors**: [Hongjie Fang*](https://tonyfang.net/), [Chenxi Wang*](https://github.com/chenxi-wang), [Yiming Wang*](mailto:sommerfeld@sjtu.edu.cn), [Jingjing Chen*](https://github.com/junxix/), [Shangning Xia](https://github.com/Xiashangning), [Jun Lv](https://lyuj1998.github.io/), [Zihao He](https://github.com/Alan-Heoooh), [Xiyan Yi](mailto:simonyxy@sjtu.edu.cn), [Yunhan Guo](mailto:yunhan_guo@sjtu.edu.cn), [Xinyu Zhan](https://github.com/kelvin34501), [Lixin Yang](https://lixiny.github.io/), [Weiming Wang](mailto:wangweiming@sjtu.edu.cn), [Cewu Lu](https://www.mvig.org/), [Hao-Shu Fang](https://fang-haoshu.github.io/)   (* = Equal Contribution)
 
@@ -8,6 +8,7 @@ This repository contains the full source codes of the ***AirExo*-2** project. Th
 
 ## 🔥 News
 
+- **[Jun. 1, 2025]** Update sample data collected by ***AirExo*-2**.
 - **[May 15, 2025]** Initial release.
 
 ## Table of Contents
